@@ -40,7 +40,7 @@ What import alias would you like configured? @/*
 
 This is a package is my eslint config → ****[@eduardo1199/eslint-config](https://www.npmjs.com/package/@eduardo1199/eslint-config)****
 
-## Depedências
+## Packages
 
 ```json
 {
@@ -52,20 +52,52 @@ This is a package is my eslint config → ****[@eduardo1199/eslint-config](https
     "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
     "component": "cypress open --component",
-    "component:headless": "cypress run --component"
+    "component:headless": "cypress run --component",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.2.0",
+    "@radix-ui/themes": "^1.0.0",
+    "axios": "^1.4.0",
     "next": "latest",
+    "next-auth": "^4.23.1",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@eduardo1199/eslint-config": "^1.0.0",
     "@types/node": "18.0.6",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.15",
     "cypress": "12.3.0",
+    "eslint": "^8.47.0",
+    "husky": "^8.0.0",
+    "postcss": "^8.4.28",
     "start-server-and-test": "1.15.2",
+    "tailwindcss": "^3.3.3",
     "typescript": "4.7.4"
   }
 }
 ```
+
+## Dependências
+
+- NextJS
+- Next-Auth
+- ReactJS
+- RadixUi/themes
+- Typescript
+- Cypress
+- TailwindCSS
+- Eslint
+- ReactHookForm
+- Zod
+- Axios
+- Nookies

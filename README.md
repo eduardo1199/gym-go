@@ -1,27 +1,103 @@
-# Next.js + Cypress
+# GymGo
 
-This example shows how to configure Cypress to work with Next.js.
+## Projeto voltado para check-in de alunos para diferentes academias, administração de entrada e saídas de cliente para cada plano, administração de alunos para academia.
 
-## Deploy your own
+<aside>
+💡 Dashboard de demandas → [https://trello.com/b/YVRGkB90/kanban-quadro-modelo](https://trello.com/b/YVRGkB90/kanban-quadro-modelo)
+Fluxo do usuário → [https://miro.com/app/board/uXjVMHku6ek=/](https://miro.com/app/board/uXjVMHku6ek=/)
+Figma → https://www.figma.com/file/juBBfyyQHqJj2T25RnSG0z/GymGo?type=design&node-id=0-1&mode=design&t=LmN6cf1KzlXPNARG-0
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-cypress)
+</aside>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-cypress&project-name=with-cypress&repository-name=with-cypress)
+## Criação de projeto
 
-## How to use
+Create project using npm with exempla cypress setings.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+```jsx
+npx create-next-app@latest -e with-cypress --use-npm gym-go
 
-```bash
-npx create-next-app --example with-cypress with-cypress-app
+What is your project named? gym-go
+Would you like to use TypeScript? Yes
+Would you like to use ESLint? Yes
+Would you like to use Tailwind CSS? Yes
+Would you like to use `src/` directory? Yes
+Would you like to use App Router? (recommended) Yes
+Would you like to customize the default import alias? Yes
+What import alias would you like configured? @/*
 ```
 
-```bash
-yarn create next-app --example with-cypress with-cypress-app
+<aside>
+💡 Options settings create project.
+
+</aside>
+
+## Package ESlint
+
+<aside>
+💡 npm instal eslint @eduardo1199/eslint-config -D
+
+</aside>
+
+This is a package is my eslint config → ****[@eduardo1199/eslint-config](https://www.npmjs.com/package/@eduardo1199/eslint-config)****
+
+## Packages
+
+```json
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
+    "component": "cypress open --component",
+    "component:headless": "cypress run --component",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.2.0",
+    "@radix-ui/themes": "^1.0.0",
+    "axios": "^1.4.0",
+    "next": "latest",
+    "next-auth": "^4.23.1",
+    "nookies": "^2.5.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@eduardo1199/eslint-config": "^1.0.0",
+    "@types/node": "18.0.6",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.15",
+    "cypress": "12.3.0",
+    "eslint": "^8.47.0",
+    "husky": "^8.0.0",
+    "postcss": "^8.4.28",
+    "start-server-and-test": "1.15.2",
+    "tailwindcss": "^3.3.3",
+    "typescript": "4.7.4"
+  }
+}
 ```
 
-```bash
-pnpm create next-app --example with-cypress with-cypress-app
-```
+## Dependências
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- NextJS
+- Next-Auth
+- ReactJS
+- RadixUi/themes
+- Typescript
+- Cypress
+- TailwindCSS
+- Eslint
+- ReactHookForm
+- Zod
+- Axios
+- Nookies

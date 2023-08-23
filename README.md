@@ -31,6 +31,34 @@ What import alias would you like configured? @/*
 
 </aside>
 
+## Components
+
+### Primary button
+
+Para o primeiro botão do sistema, o botão primario será um botão padrão que consiste em ações quais do usuário. Já foi implementado funcionalidades de hover e focus para acessibilidade.
+
+![Untitled](GymGo%20d4faf5acbba74abc95deaac9266e87f3/Untitled.png)
+
+```
+interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+}
+
+export function PrimaryButton({ children, ...props }: PrimaryButtonProps) {
+  return (
+    <button
+      {...props}
+      type="button"
+      className="p-2 rounded ease-in duration-300 hover:bg-secondary-blue hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105 animate-visible focus:outline-none border-none focus:-translate-y-1 focus:scale-105 focus:shadow-lg focus:shadow-tertiary-purple focus:bg-secondary-blue"
+    >
+      <span className="text-primary-purple font-bold text-base">
+        {children}
+      </span>
+    </button>
+  )
+}
+```
+
 ## Package ESlint
 
 <aside>

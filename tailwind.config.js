@@ -20,10 +20,13 @@ module.exports = {
             opacity: 0,
           },
           '25%': {
-            opacity: 0.2,
+            opacity: 0.25,
+          },
+          '50%': {
+            opacity: 0.5,
           },
           '75%': {
-            opacity: 0.7,
+            opacity: 0.75,
           },
           '100%': {
             opacity: 1,

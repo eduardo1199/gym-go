@@ -1,9 +1,16 @@
 import { Button } from 'components/Button'
 import { Header } from 'components/Header'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import * as Accordion from '@radix-ui/react-accordion'
 
 export default function Home() {
+  const router = useRouter()
+
+  function handleNavigateToRegister() {
+    router.push('/Register')
+  }
+
   return (
     <div className="w-full h-screen bg-primary-blue">
       <Header />
@@ -27,7 +34,9 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-5 animate-visible">
-              <Button.Primary>Cadastra-se</Button.Primary>
+              <Button.Primary onClick={handleNavigateToRegister}>
+                <span>Cadastra-se</span>
+              </Button.Primary>
             </div>
           </div>
           <div className="flex animate-visible">
@@ -45,20 +54,21 @@ export default function Home() {
             Quem somos?
           </strong>
           <div className="flex gap-10 p-4">
-            <div className="flex flex-1 animate-visible">
+            <div className="flex animate-visible">
               <Image
                 src="/fit_second.jpg"
-                width={600}
+                width={500}
                 height={500}
                 alt="exercises from male"
                 className="opacity-80 box rounded-lg"
               />
             </div>
-            <div className="flex flex-col justify-between animate-visible">
+
+            <div className="flex flex-col justify-between animate-visible flex-1">
               <Accordion.Root
                 type="single"
                 collapsible
-                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
+                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-md hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
               >
                 <Accordion.Item value="about">
                   <Accordion.Trigger className="text-primary-white font-bold text-lg p-2 hover:brightness-105 w-full">
@@ -67,8 +77,11 @@ export default function Home() {
                   </Accordion.Trigger>
 
                   <Accordion.Content className="p-2">
-                    <span className="text-sm text-primary-white font-bold">
-                      Aqui vou escrever algo
+                    <span className="text-sm text-second-purple font-bold">
+                      Enquanto assinante de algum plano, você aluno terá
+                      benefícios daquele determinado plano selecionado, sendo
+                      realizado uma cobrança mensal do plano escolhido. Cada
+                      plano possui
                     </span>
                   </Accordion.Content>
                 </Accordion.Item>
@@ -76,7 +89,7 @@ export default function Home() {
               <Accordion.Root
                 type="single"
                 collapsible
-                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
+                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-md hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
               >
                 <Accordion.Item value="manager">
                   <Accordion.Trigger className="text-primary-white font-bold text-lg p-2 hover:brightness-105 w-full flex">
@@ -84,8 +97,11 @@ export default function Home() {
                   </Accordion.Trigger>
 
                   <Accordion.Content className="p-2">
-                    <span className="text-sm text-primary-white font-bold">
-                      Aqui vou escrever algo
+                    <span className="text-sm text-second-purple font-bold">
+                      Caso seja administrador da sua academia, você poderá
+                      validar as entradas de cada aluno pela nossa plataforma,
+                      cadastrar alunos fixos no sistema, gerenciar planos e
+                      muito mais!
                     </span>
                   </Accordion.Content>
                 </Accordion.Item>
@@ -93,7 +109,7 @@ export default function Home() {
               <Accordion.Root
                 type="single"
                 collapsible
-                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
+                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-md hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
               >
                 <Accordion.Item value="map">
                   <Accordion.Trigger className="text-primary-white font-bold text-lg p-2 hover:brightness-105 w-full flex">
@@ -101,8 +117,9 @@ export default function Home() {
                   </Accordion.Trigger>
 
                   <Accordion.Content className="p-2">
-                    <span className="text-sm text-primary-white font-bold">
-                      Aqui vou escrever algo
+                    <span className="text-sm text-second-purple font-bold">
+                      Dependendo da escolha do seu plano, você terá acesso há
+                      academia mais próxima de você!
                     </span>
                   </Accordion.Content>
                 </Accordion.Item>
@@ -110,7 +127,7 @@ export default function Home() {
               <Accordion.Root
                 type="single"
                 collapsible
-                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
+                className="border border-primary-purple transition-all rounded bg-transparent over:bg-secondary-blue hover:shadow-md hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105"
               >
                 <Accordion.Item value="student">
                   <Accordion.Trigger className="text-primary-white font-bold text-lg p-2 hover:brightness-105 w-full flex">
@@ -118,14 +135,19 @@ export default function Home() {
                   </Accordion.Trigger>
 
                   <Accordion.Content className="p-2">
-                    <span className="text-sm text-primary-white font-bold">
-                      Aqui vou escrever algo
+                    <span className="text-sm text-second-purple font-bold">
+                      Dependendo da escolha do seu plano, você terá a um
+                      acompnhamento bem de pertinho entre você e os instrutores!
                     </span>
                   </Accordion.Content>
                 </Accordion.Item>
               </Accordion.Root>
             </div>
           </div>
+        </section>
+        <section className="flex flex-col items-center justify-center px-2 py-12 gap-12 bg-primary-blue pt-10">
+          <strong className="text-4xl font-bold text-primary-white animate-visible"></strong>
+          <div className="flex gap-10 p-4"></div>
         </section>
       </main>
     </div>

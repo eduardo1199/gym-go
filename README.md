@@ -31,13 +31,17 @@ What import alias would you like configured? @/*
 
 </aside>
 
+## Layouts
+
+### LADING PAGE
+
 ## Components
 
 ### Primary button
 
 Para o primeiro botão do sistema, o botão primario será um botão padrão que consiste em ações quais do usuário. Já foi implementado funcionalidades de hover e focus para acessibilidade.
 
-![Untitled](GymGo%20d4faf5acbba74abc95deaac9266e87f3/Untitled.png)
+![página de login](images/primary-button.png)
 
 ```
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -57,6 +61,37 @@ export function PrimaryButton({ children, ...props }: PrimaryButtonProps) {
     </button>
   )
 }
+```
+
+## Pipeline
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  CI:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+
+        - name: Setup Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18.x
+      
+        - name: Install packages
+          run: npm install
+      
+        - name: Run tests
+          run: npm run test
 ```
 
 ## Package ESlint

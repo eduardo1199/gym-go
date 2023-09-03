@@ -31,6 +31,10 @@ What import alias would you like configured? @/*
 
 </aside>
 
+## Layouts
+
+### LADING PAGE
+
 ## Components
 
 ### Primary button
@@ -57,6 +61,37 @@ export function PrimaryButton({ children, ...props }: PrimaryButtonProps) {
     </button>
   )
 }
+```
+
+## Pipeline
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  CI:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+
+        - name: Setup Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 18.x
+      
+        - name: Install packages
+          run: npm install
+      
+        - name: Run tests
+          run: npm run test
 ```
 
 ## Package ESlint

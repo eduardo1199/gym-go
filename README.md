@@ -37,7 +37,7 @@ What import alias would you like configured? @/*
 
 Para o primeiro botão do sistema, o botão primario será um botão padrão que consiste em ações quais do usuário. Já foi implementado funcionalidades de hover e focus para acessibilidade.
 
-![Untitled](GymGo%20d4faf5acbba74abc95deaac9266e87f3/Untitled.png)
+![página de login](images/primary-button.png)
 
 ```
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

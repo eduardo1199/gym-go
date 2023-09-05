@@ -1,4 +1,10 @@
+import { WarningCircle } from '@phosphor-icons/react'
 import { Button } from 'components/Button'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from 'components/HoverCard'
 
 export default function RegisterManager() {
   return (
@@ -10,15 +16,30 @@ export default function RegisterManager() {
         <Button.Secondary>Administrar minha academia</Button.Secondary>
         <Button.Secondary>Uma academia mais próxima de mim</Button.Secondary>
       </div>
-      <div className="flex flex-1">
-        <header>
+      <div className="flex flex-1 p-4 flex-col">
+        <header className="">
           <div>
             <strong className="text-5xl font-bold text-primary-white animate-visible">
               Gym<span className="text-primary-purple">Go</span>
             </strong>
           </div>
         </header>
-        <div></div>
+        <div className="mt-8">
+          <HoverCard>
+            <HoverCardTrigger>
+              <span className="text-2xl text-primary-purple font-bold animate-pulse">
+                Cadastro do Administrador
+              </span>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="p-2">
+                <span className="text-base">
+                  É necessário o preenchimendo da primeira etapa do cadastro!
+                </span>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
       </div>
     </main>
   )

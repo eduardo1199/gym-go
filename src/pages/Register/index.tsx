@@ -1,10 +1,12 @@
-import { WarningCircle } from '@phosphor-icons/react'
+import { Barbell, User, WarningCircle } from '@phosphor-icons/react'
 import { Button } from 'components/Button'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from 'components/HoverCard'
+import { Input } from 'components/Input'
+import { Tab } from 'components/Tabs'
 
 export default function RegisterManager() {
   return (
@@ -39,6 +41,32 @@ export default function RegisterManager() {
               </div>
             </HoverCardContent>
           </HoverCard>
+        </div>
+        <div className="px-10 my-auto">
+          <Tab.Root defaultValue="user-infos">
+            <Tab.TabsList>
+              <Tab.TabsTrigger value="user-infos">
+                <User size={24} />
+                Informe seus dados abaixo
+              </Tab.TabsTrigger>
+              <Tab.TabsTrigger value="gym-info">
+                <Barbell size={24} />
+                Informe os dados da academia
+              </Tab.TabsTrigger>
+            </Tab.TabsList>
+
+            <Tab.TabsContent value="user-infos">
+              {/* Component form to manager */}
+              <form className="flex flex-col rounded shadow-lg gap-2">
+                <Input placeholder="Nome" label="Insira seu nome" id="name" />
+                <Input
+                  placeholder="dia/Mês/ano"
+                  label="Data de nascimento"
+                  id="birthDate"
+                />
+              </form>
+            </Tab.TabsContent>
+          </Tab.Root>
         </div>
       </div>
     </main>

@@ -60,6 +60,9 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      boxShadow: {
+        shadow: '0px 0px 0px 5px rgb(118, 126, 250)',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -74,23 +77,22 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
-        keyframes: {
-          visible: {
-            '0%': {
-              opacity: 0,
-            },
-            '25%': {
-              opacity: 0.25,
-            },
-            '50%': {
-              opacity: 0.5,
-            },
-            '75%': {
-              opacity: 0.75,
-            },
-            '100%': {
-              opacity: 1,
-            },
+
+        visible: {
+          '0%': {
+            opacity: 0,
+          },
+          '25%': {
+            opacity: 0.25,
+          },
+          '50%': {
+            opacity: 0.5,
+          },
+          '75%': {
+            opacity: 0.75,
+          },
+          '100%': {
+            opacity: 1,
           },
         },
       },

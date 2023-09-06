@@ -41,7 +41,7 @@ What import alias would you like configured? @/*
 
 Para o primeiro botão do sistema, o botão primario será um botão padrão que consiste em ações quais do usuário. Já foi implementado funcionalidades de hover e focus para acessibilidade.
 
-![página de login](images/primary-button.png)
+![primary-button](images/primary-button.png)
 
 ```
 interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -61,6 +61,74 @@ export function PrimaryButton({ children, ...props }: PrimaryButtonProps) {
     </button>
   )
 }
+```
+
+### Secondary button
+
+Segundo component do sistema, o botão secondário será um botão padrão que consiste em ações quais do usuário. Já foi implementado funcionalidades de hover e focus para acessibilidade.
+
+![primary-button](images/secondary-button.png)
+
+```
+import { ButtonHTMLAttributes, ReactNode } from 'react'
+
+interface SecondaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode
+}
+
+export function SecondaryButton({ children, ...props }: SecondaryButtonProps) {
+  return (
+    <button
+      {...props}
+      type="button"
+      className="p-2 rounded ease-in duration-300 hover:bg-transparent hover:shadow-lg hover:shadow-tertiary-purple hover:-translate-y-1 hover:scale-105 animate-visible focus:outline-none border-none focus:-translate-y-1 focus:scale-105 focus:shadow-lg focus:shadow-tertiary-purple focus:text-primary-purple focus:bg-secondary-blue text-primary-purple hover:text-secondary-blue font-bold text-lg bg-secondary-blue w-full"
+    >
+      {children}
+    </button>
+  )
+}
+```
+
+### Input Form
+
+Componente de input para formulário, com propriedade label, em breve será modificado para adição de erro.
+
+![input-form](images/input-form.png)
+
+```
+import * as React from 'react'
+
+import { cn } from '@/lib/utils'
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, label, ...props }, ref) => {
+    return (
+      <>
+        <label htmlFor={props.id} className="text-base text-white font-bold">
+          {label}
+        </label>
+        <input
+          type={type}
+          id={props.id}
+          className={cn(
+            'flex h-10 w-full rounded-md border-input bg-background px-3 py-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-primary-purple text-white font-bold placeholder:text-white shadow-sm shadow-primary-purple',
+            className,
+          )}
+          ref={ref}
+          {...props}
+        />
+      </>
+    )
+  },
+)
+Input.displayName = 'Input'
+
+export { Input }
 ```
 
 ## Pipeline

@@ -56,7 +56,7 @@ export default function RegisterManager() {
             </Tab.TabsList>
 
             <Tab.TabsContent value="user-infos">
-              {/* Component to manager */}
+              {/* Component form to manager */}
               <form className="flex flex-col rounded shadow-lg gap-2">
                 <Input placeholder="Nome" label="Insira seu nome" id="name" />
                 <Input

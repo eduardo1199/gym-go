@@ -5,43 +5,30 @@ import {
   HoverCardTrigger,
 } from 'components/HoverCard'
 import { ManagerForm } from './components/ManagerForm'
+import Image from 'next/image'
 
-export default function RegisterManager() {
+export default function Register() {
   return (
-    <main className="w-full h-screen bg-primary-blue flex">
-      <div className="h-full w-1/3 bg-white flex justify-center items-center flex-col gap-20 p-5">
-        <strong className="text-2xl animate-visible">
-          O que você mais deseja?
-        </strong>
-        <Button.Secondary>Administrar minha academia</Button.Secondary>
-        <Button.Secondary>Uma academia mais próxima de mim</Button.Secondary>
-      </div>
-      <div className="flex flex-1 p-4 flex-col">
-        <header className="">
-          <div>
-            <strong className="text-5xl font-bold text-primary-white animate-visible">
-              Gym<span className="text-primary-purple">Go</span>
-            </strong>
-          </div>
-        </header>
-        <div className="mt-8">
-          <HoverCard>
-            <HoverCardTrigger>
-              <span className="text-2xl text-primary-purple font-bold animate-pulse">
-                Cadastro do Administrador
-              </span>
-            </HoverCardTrigger>
-            <HoverCardContent>
-              <div className="p-2">
-                <span className="text-base">
-                  É necessário o preenchimendo da primeira etapa do cadastro!
-                </span>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
-        </div>
+    <main className="w-full h-screen bg-primary-blue p-4">
+      <div className="flex justify-center items-center bg-white max-w-[1317px] mx-auto my-[180px] rounded-xl px-6">
+        <div className="flex flex-col px-6 gap-4">
+          <strong className="text-5xl font-bold text-primary-blue animate-visible">
+            Gym<span className="text-primary-purple">Go</span>
+          </strong>
+          <p className="text-primary-blue font-bold text-sm">
+            Realize o cadastro da sua academia na plataforma para os clientes
+            irem até voce! ou caso esteja procurando uma flexibilidade maior
+            para treinar!
+          </p>
 
-        <ManagerForm />
+          <span className="text-primary-purple font-bold text-xl">
+            Cadastre-se na plataforma e escolha um plano que mais se parece com
+            você!
+          </span>
+        </div>
+        <div className="">
+          <ManagerForm />
+        </div>
       </div>
     </main>
   )

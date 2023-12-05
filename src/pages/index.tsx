@@ -1,21 +1,14 @@
-import { Button } from 'components/Button'
 import { Header } from 'components/Header'
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import * as Accordion from '@radix-ui/react-accordion'
+import { NavigateLink } from 'components/NavigateLink'
 
 export default function Home() {
-  const router = useRouter()
-
-  function handleNavigateToRegister() {
-    router.push('/Register')
-  }
-
   return (
     <div className="w-full h-screen bg-primary-blue">
       <Header />
       <main className="h-full bg-primary-blue">
-        <section className="flex justify-between items-center bg-primary-blue p-2 gap-4">
+        <section className="flex justify-between items-center bg-primary-blue gap-4">
           <div className="max-w-6xl flex flex-col mx-auto p-4">
             <div className="mb-10">
               <strong className="text-8xl font-bold text-primary-white animate-visible">
@@ -34,9 +27,7 @@ export default function Home() {
               </p>
             </div>
             <div className="mt-5 animate-visible">
-              <Button.Primary onClick={handleNavigateToRegister}>
-                <span>Cadastra-se</span>
-              </Button.Primary>
+              <NavigateLink href="/register" text="Cadastra-se" />
             </div>
           </div>
           <div className="flex animate-visible">

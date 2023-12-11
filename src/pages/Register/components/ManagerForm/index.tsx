@@ -1,35 +1,39 @@
+import { DatePicker } from '@mui/x-date-pickers'
 import { Barbell, User } from '@phosphor-icons/react'
 import { Button } from 'components/Button'
-import { DatePickerDemo } from 'components/DatePicker'
 
 import { Input } from 'components/Input'
 import { Tab } from 'components/Tabs'
+import { StyledDatePicker } from './styes'
 
 export function ManagerForm() {
   return (
-    <div className="px-10 py-3 my-auto bg-white rounded shadow-tertiary-purple shadow-xl max-w-2xl mx-auto">
+    <div className="bg-white rounded-lg shadow-primary-gray shadow-xl max-w-2xl p-3">
       <Tab.Root defaultValue="user-infos">
         <Tab.TabsList>
           <Tab.TabsTrigger value="user-infos">
             <User size={24} />
-            Informe seus dados abaixo
+            <span>Informe seus dados pessoais</span>
           </Tab.TabsTrigger>
           <Tab.TabsTrigger value="gym-info">
             <Barbell size={24} />
-            Informe os dados da academia
+            <span>Informe os dados da academia</span>
           </Tab.TabsTrigger>
         </Tab.TabsList>
 
         <Tab.TabsContent value="user-infos">
           {/* Component form to manager */}
-          <form className="flex flex-col rounded gap-2">
-            <Input placeholder="Nome" label="Insira seu nome" id="name" />
-            <DatePickerDemo />
-            <Input placeholder="999.999.999-99" label="CPF" id="cpf" />
-            <Input placeholder="jonhdoe@gmail.com" label="Email" id="email" />
+          <form className="flex flex-col rounded gap-4">
+            <Input placeholder="Nome" id="name" />
+
+            <StyledDatePicker label="Data de nascimento" />
+
+            <Input placeholder="digite seu CPF" id="cpf" />
+
+            <Input placeholder="jonhdoe@gmail.com" id="email" />
+
             <Input
-              placeholder="(55) 55 5555 5555"
-              label="Telefone"
+              placeholder="digite seu telefone ex: (99) 9 9999 99999"
               id="phone"
             />
 

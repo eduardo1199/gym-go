@@ -7,7 +7,7 @@ import { Tab } from 'components/Tabs'
 
 export function ManagerForm() {
   return (
-    <div className="px-10 py-3 my-auto bg-white rounded shadow-tertiary-purple shadow-xl max-w-2xl mx-auto">
+    <div className="bg-white rounded-lg shadow-primary-gray shadow-xl max-w-2xl p-3">
       <Tab.Root defaultValue="user-infos">
         <Tab.TabsList>
           <Tab.TabsTrigger value="user-infos">

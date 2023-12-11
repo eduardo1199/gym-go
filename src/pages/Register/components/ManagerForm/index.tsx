@@ -12,24 +12,23 @@ export function ManagerForm() {
         <Tab.TabsList>
           <Tab.TabsTrigger value="user-infos">
             <User size={24} />
-            Informe seus dados abaixo
+            <span>Informe seus dados pessoais</span>
           </Tab.TabsTrigger>
           <Tab.TabsTrigger value="gym-info">
             <Barbell size={24} />
-            Informe os dados da academia
+            <span>Informe os dados da academia</span>
           </Tab.TabsTrigger>
         </Tab.TabsList>
 
         <Tab.TabsContent value="user-infos">
           {/* Component form to manager */}
-          <form className="flex flex-col rounded gap-2">
-            <Input placeholder="Nome" label="Insira seu nome" id="name" />
+          <form className="flex flex-col rounded gap-4">
+            <Input placeholder="Nome" id="name" />
             <DatePickerDemo />
-            <Input placeholder="999.999.999-99" label="CPF" id="cpf" />
-            <Input placeholder="jonhdoe@gmail.com" label="Email" id="email" />
+            <Input placeholder="digite seu CPF" id="cpf" />
+            <Input placeholder="jonhdoe@gmail.com" id="email" />
             <Input
-              placeholder="(55) 55 5555 5555"
-              label="Telefone"
+              placeholder="digite seu telefone ex: (99) 9 9999 99999"
               id="phone"
             />
 

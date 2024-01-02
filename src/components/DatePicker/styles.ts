@@ -8,13 +8,13 @@ export const StyledDatePicker = styled(DatePicker)({
     color: '#3D4268',
     borderRadius: 8,
     backgroundColor: 'transparent',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 
   '.MuiInputLabel-root': {
     color: '#9BB1D6',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     opacity: 0.7,
   },

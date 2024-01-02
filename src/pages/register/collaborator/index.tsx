@@ -1,11 +1,4 @@
-import { Button } from 'components/Button'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from 'components/HoverCard'
 import { ManagerForm } from './components/ManagerForm'
-import Image from 'next/image'
 
 export default function Register() {
   return (
@@ -17,13 +10,11 @@ export default function Register() {
           </strong>
           <p className="text-primary-blue font-bold text-sm my-4">
             Realize o cadastro da sua academia na plataforma para os clientes
-            irem até voce! ou caso esteja procurando uma flexibilidade maior
-            para treinar!
+            irem até voce!
           </p>
 
           <span className="text-primary-purple font-bold text-xl">
-            Cadastre-se na plataforma e escolha um plano que mais se parece com
-            você!
+            É simples o cadastro e você pode desativar a hora que quiser!
           </span>
 
           <div></div>

@@ -1,10 +1,6 @@
-import { DatePicker } from '@mui/x-date-pickers'
 import { Barbell, User } from '@phosphor-icons/react'
-import { Button } from 'components/Button'
-
-import { Input } from 'components/Input'
 import { Tab } from 'components/Tabs'
-import { StyledDatePicker } from './styes'
+import { FormRegister } from 'pages/register/components/FormRegister'
 
 export function ManagerForm() {
   return (
@@ -23,22 +19,7 @@ export function ManagerForm() {
 
         <Tab.TabsContent value="user-infos">
           {/* Component form to manager */}
-          <form className="flex flex-col rounded gap-4">
-            <Input placeholder="Nome" id="name" />
-
-            <StyledDatePicker label="Data de nascimento" />
-
-            <Input placeholder="digite seu CPF" id="cpf" />
-
-            <Input placeholder="jonhdoe@gmail.com" id="email" />
-
-            <Input
-              placeholder="digite seu telefone ex: (99) 9 9999 99999"
-              id="phone"
-            />
-
-            <Button.Secondary>Próxima etapa</Button.Secondary>
-          </form>
+          <FormRegister />
         </Tab.TabsContent>
       </Tab.Root>
     </div>

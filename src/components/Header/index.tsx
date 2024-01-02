@@ -7,7 +7,12 @@ export function Header() {
       <img src="" alt="logo" />
       <div className="flex justify-between gap-8 p-2">
         <NavigateLink href="/about" text="Quem somos" title="about" />
-        <NavigateLink href="/register" text="Cadastro" title="register" />
+        <NavigateLink
+          href="/register"
+          text="Sou colaborador"
+          title="register"
+        />
+        <NavigateLink href="/register" text="Sou aluno" title="register" />
         <NavigateLink href="/login" text="Entrar" title="login" />
       </div>
     </header>

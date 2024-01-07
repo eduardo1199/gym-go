@@ -5,28 +5,34 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Dayjs } from 'dayjs'
+import { baseApi } from 'lib/baseApi'
 
 interface RegisterClientFormData {
-  name: string
-  date: Date
-  cpf: string
+  username: string
+  /*  date: Date */
+  /*  cpf: string */
   email: string
-  phone: string
+  /* phone: string */
+  password: string
+  office: string
 }
 
 const RegisterClientFormDataSchema = z.object({
-  name: z.string({
+  username: z.string({
     required_error: 'Campo obrigatório',
   }),
-  date: z.date({
+  /* date: z.date({
     required_error: 'Campo obrigatório',
-  }),
-  cpf: z
+  }), */
+  /*  cpf: z
     .string({
       required_error: 'Campo obrigatório',
     })
-    .regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf inválido'),
-  phone: z.string({
+    .regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf inválido'), */
+  /*   phone: z.string({
+    required_error: 'Campo obrigatório',
+  }), */
+  password: z.string({
     required_error: 'Campo obrigatório',
   }),
   email: z
@@ -34,6 +40,7 @@ const RegisterClientFormDataSchema = z.object({
       required_error: 'Campo obrigatório',
     })
     .email('Email inválido'),
+  office: z.enum(['A', 'G']).optional(),
 })
 
 export function FormRegister() {
@@ -47,7 +54,16 @@ export function FormRegister() {
   })
 
   async function handleSubmitRegisterClient(data: RegisterClientFormData) {
-    console.log(data)
+    const { email, office, password, username } = data
+
+    const response = await baseApi.post('/register', {
+      username,
+      email,
+      office: office ?? 'A',
+      password,
+    })
+
+    console.log(response.data)
   }
 
   return (
@@ -55,9 +71,9 @@ export function FormRegister() {
       className="flex flex-col rounded gap-4"
       onSubmit={handleSubmit(handleSubmitRegisterClient)}
     >
-      <Input placeholder="Nome" id="name" {...register('name')} />
+      <Input placeholder="Nome" id="name" {...register('username')} />
 
-      <Controller
+      {/*  <Controller
         control={control}
         name="date"
         render={({ field }) => (
@@ -66,10 +82,15 @@ export function FormRegister() {
             value={field.value}
             onChange={(date: Dayjs) => field.onChange(date.toDate())}
           />
-        )}
+        )}  
       />
+      */}
 
-      <Input placeholder="digite seu CPF" id="cpf" {...register('cpf')} />
+      <Input
+        placeholder="digite sua senha"
+        id="cpf"
+        {...register('password')}
+      />
 
       <Input
         placeholder="jonhdoe@gmail.com"
@@ -78,9 +99,9 @@ export function FormRegister() {
       />
 
       <Input
-        placeholder="digite seu telefone ex: (99) 9 9999 99999"
+        placeholder="digite seu cargo"
         id="phone"
-        {...register('phone')}
+        {...register('office')}
       />
 
       <Button.Secondary type="submit" disabled={isSubmitting}>

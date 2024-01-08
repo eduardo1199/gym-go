@@ -1,20 +1,23 @@
 import { Button } from 'components/Button'
-import { StyledDatePicker } from 'components/DatePicker/styles'
 import { Input } from 'components/Input'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Dayjs } from 'dayjs'
 import { baseApi } from 'lib/baseApi'
+import { Offices } from 'types/offices'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from 'components/Select'
 
 interface RegisterClientFormData {
   username: string
-  /*  date: Date */
-  /*  cpf: string */
   email: string
-  /* phone: string */
   password: string
-  office: string
+  cargo: Offices
 }
 
 const RegisterClientFormDataSchema = z.object({
@@ -32,34 +35,42 @@ const RegisterClientFormDataSchema = z.object({
   /*   phone: z.string({
     required_error: 'Campo obrigatório',
   }), */
-  password: z.string({
-    required_error: 'Campo obrigatório',
+  password: z
+    .string()
+    .min(6, 'A senha precisa ter no mínimo 6 caracteres ou números'),
+  email: z.string().email('Email inválido, digite um email válido!'),
+  cargo: z.enum([Offices.student, Offices.manager, Offices.employee], {
+    invalid_type_error: 'Selecione um perfil!',
+    required_error: 'Selecione um perfil!',
   }),
-  email: z
-    .string({
-      required_error: 'Campo obrigatório',
-    })
-    .email('Email inválido'),
-  office: z.enum(['A', 'G']).optional(),
 })
 
 export function FormRegister() {
   const {
     register,
+    formState: { isSubmitting, errors },
     control,
-    formState: { isSubmitting },
+    setError,
     handleSubmit,
   } = useForm<RegisterClientFormData>({
     resolver: zodResolver(RegisterClientFormDataSchema),
   })
 
   async function handleSubmitRegisterClient(data: RegisterClientFormData) {
-    const { email, office, password, username } = data
+    const { email, cargo, password, username } = data
+
+    if (!username.trim()) {
+      setError('username', {
+        message: 'Campo obrigatório',
+      })
+
+      return
+    }
 
     const response = await baseApi.post('/register', {
       username,
       email,
-      office: office ?? 'A',
+      cargo,
       password,
     })
 
@@ -67,46 +78,68 @@ export function FormRegister() {
   }
 
   return (
-    <form
-      className="flex flex-col rounded gap-4"
-      onSubmit={handleSubmit(handleSubmitRegisterClient)}
-    >
-      <Input placeholder="Nome" id="name" {...register('username')} />
+    <div className="bg-white rounded-lg shadow-primary-gray shadow-xl p-3 flex flex-col gap-4">
+      <strong className="text-2xl font-bold text-primary-blue animate-visible">
+        Gym<span className="text-primary-purple">Go</span>
+      </strong>
 
-      {/*  <Controller
-        control={control}
-        name="date"
-        render={({ field }) => (
-          <StyledDatePicker
-            label="Dia do nascimento"
-            value={field.value}
-            onChange={(date: Dayjs) => field.onChange(date.toDate())}
-          />
-        )}  
-      />
-      */}
+      <span className="font-bold text-sm text-primary-blue animate-pulse">
+        Preenche suas informações!
+      </span>
 
-      <Input
-        placeholder="digite sua senha"
-        id="cpf"
-        {...register('password')}
-      />
+      <form
+        className="flex flex-col rounded gap-4"
+        onSubmit={handleSubmit(handleSubmitRegisterClient)}
+      >
+        <Input.Root
+          placeholder="Nome"
+          {...register('username')}
+          error={!!errors.username?.message}
+        >
+          <Input.Error message={errors.username?.message} />
+        </Input.Root>
 
-      <Input
-        placeholder="jonhdoe@gmail.com"
-        id="email"
-        {...register('email')}
-      />
+        <Input.Root
+          placeholder="digite sua senha"
+          {...register('password')}
+          type="password"
+          error={!!errors.password?.message}
+        >
+          <Input.Error message={errors.password?.message} />
+        </Input.Root>
 
-      <Input
-        placeholder="digite seu cargo"
-        id="phone"
-        {...register('office')}
-      />
+        <Input.Root
+          placeholder="jonhdoe@gmail.com"
+          {...register('email')}
+          error={!!errors.email?.message}
+        >
+          <Input.Error message={errors.email?.message} />
+        </Input.Root>
 
-      <Button.Secondary type="submit" disabled={isSubmitting}>
-        Próxima etapa
-      </Button.Secondary>
-    </form>
+        <Controller
+          name="cargo"
+          control={control}
+          render={({ field }) => {
+            return (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger error={!!errors.cargo?.message}>
+                  <SelectValue placeholder="Selecione seu perfil" />
+                </SelectTrigger>
+                <Input.Error message={errors.cargo?.message} />
+                <SelectContent>
+                  <SelectItem value="A">Aluno</SelectItem>
+                  <SelectItem value="G">Gerente</SelectItem>
+                  <SelectItem value="F">Funcionário</SelectItem>
+                </SelectContent>
+              </Select>
+            )
+          }}
+        />
+
+        <Button.Secondary type="submit" disabled={isSubmitting}>
+          Cadastrar
+        </Button.Secondary>
+      </form>
+    </div>
   )
 }

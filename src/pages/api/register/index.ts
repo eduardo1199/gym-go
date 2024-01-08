@@ -17,14 +17,18 @@ export default async function handler(
     path: '/',
   }) */
 
-  const response = await api.post('api/cadastro/', {
-    email,
-    office,
-    password,
-    username,
-  })
+  try {
+    const response = await api.post('api/cadastro/', {
+      email,
+      office,
+      password,
+      username,
+    })
 
-  const token = response.data
+    const token = response.data
 
-  return res.status(201).json({ token })
+    return res.status(201).json({ token })
+  } catch (error) {
+    return res.status(400).json({ error })
+  }
 }

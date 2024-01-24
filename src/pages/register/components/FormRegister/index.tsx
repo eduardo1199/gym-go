@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'components/Select'
+import Router from 'next/router'
 
 interface RegisterClientFormData {
   username: string
@@ -67,14 +68,34 @@ export function FormRegister() {
       return
     }
 
-    const response = await baseApi.post('/register', {
-      username,
-      email,
-      cargo,
-      password,
-    })
+    try {
+      const response = await baseApi.post('/register', {
+        username,
+        email,
+        cargo,
+        password,
+      })
 
-    console.log(response.data)
+      console.log(response.data)
+
+      if (cargo === Offices.student) {
+        Router.push('/register/complement/student')
+      }
+
+      if (cargo === Offices.manager) {
+        Router.push('/register/complement/manager')
+      }
+    } catch (error) {
+      console.error(error)
+
+      if (cargo === Offices.student) {
+        Router.push('/register/complement/student')
+      }
+
+      if (cargo === Offices.manager) {
+        Router.push('/register/complement/manager')
+      }
+    }
   }
 
   return (
@@ -136,9 +157,11 @@ export function FormRegister() {
           }}
         />
 
-        <Button.Secondary type="submit" disabled={isSubmitting}>
-          Cadastrar
-        </Button.Secondary>
+        {isSubmitting ? (
+          <Button.Loading />
+        ) : (
+          <Button.Secondary type="submit">Cadastrar</Button.Secondary>
+        )}
       </form>
     </div>
   )

@@ -1,106 +1,52 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from 'components/AlertDialog'
 import { Button } from 'components/Button'
 import { Input } from 'components/Input'
-import Router from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { DialogConfirm } from './components/DialogConfirm'
+import { PlanButton } from './components/PlanButton'
 
 const mocksPlans = [
   {
-    id: 1,
+    id: '1',
     name: 'Bronze',
     description: 'Descrição plano bronza',
+    price: 'R$ 59.00',
   },
   {
-    id: 2,
+    id: '2',
     name: 'Silver',
     description: 'Descrição plano Silver',
+    price: 'R$ 59.00',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Gold',
     description: 'Descrição plano Gold',
+    price: 'R$ 59.00',
   },
   {
-    id: 4,
+    id: '4',
     name: 'Diamond',
     description: 'Descrição plano Diamond',
+    price: 'R$ 59.00',
   },
   {
-    id: 5,
+    id: '5',
     name: 'Emerald',
     description: 'Descrição plano Emerald',
+    price: 'R$ 59.00',
   },
 ]
 
 export default function ComplementRegisterStudent() {
-  const [openDialog, setOpenDialog] = useState(false)
-  const [idPlan, setIdPlan] = useState<number | null>(null)
+  const [planId, setPlanId] = useState<string | null>(null)
 
-  function handleCloseModal() {
-    setOpenDialog(false)
+  function handleSetSelectedPlan(planId: string) {
+    setPlanId(planId)
   }
-
-  function handleNavigateToMap() {
-    Router.push('/map')
-    setOpenDialog(false)
-  }
-
-  function handleSetSelectedPlan(planId: number) {
-    setIdPlan(planId)
-  }
-
-  useEffect(() => {
-    /* setOpenDialog(true) */
-  }, [])
 
   return (
     <div className="w-full h-screen bg-primary-blue">
-      <AlertDialog open={openDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-2xl">
-              Você ainda não tem plano!!
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-base">
-              Você já tem acesso a nossa plataforma, porém ainda não realizou o
-              cadastro de um plano que tem a sua cara, selecione{' '}
-              <span className="font-bold text-base text-primary-blue">
-                Selecionar um plano
-              </span>{' '}
-              para cadastrar o restante das informações e escolher seu plano!
-            </AlertDialogDescription>
-            <AlertDialogDescription className="text-base">
-              Porém você pode selecionar em{' '}
-              <span className="font-bold text-base text-primary-blue">
-                Ir para plataforma
-              </span>{' '}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel
-              onClick={handleCloseModal}
-              className="bg-primary-purple p-2 rounded font-bold text-primary-white"
-            >
-              Selecionar um plano
-            </AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleNavigateToMap}
-              className="bg-primary-blue p-2 rounded font-bold text-primary-white"
-            >
-              Continuar na plataforma
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <DialogConfirm />
 
       <div className="h-full flex max-w-7xl mx-auto gap-8 p-4">
         <div className="flex flex-1 flex-col p-10 justify-center gap-12 border-r border-gray-500">
@@ -150,18 +96,14 @@ export default function ComplementRegisterStudent() {
           <div className="flex flex-col gap-4">
             {mocksPlans.map((plan) => {
               return (
-                <button
+                <PlanButton
                   key={plan.id}
-                  className="border bg-transparent border-primary-gray p-6 flex justify-between items-center hover:bg-primary-purple animate-visible hover:-translate-y-1 hover:scale-105 ease-in duration-300 group"
-                >
-                  <span className="text-white font-extrabold text-lg">
-                    {plan.name}
-                  </span>
-
-                  <p className="text-primary-purple font-extrabold text-lg group-hover:text-primary-blue">
-                    R$ 59.00
-                  </p>
-                </button>
+                  name={plan.name}
+                  price={plan.price}
+                  id={plan.id}
+                  onSelectedPlan={handleSetSelectedPlan}
+                  isSelected={planId === plan.id}
+                />
               )
             })}
           </div>

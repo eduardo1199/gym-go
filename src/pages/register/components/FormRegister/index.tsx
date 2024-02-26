@@ -13,38 +13,38 @@ import {
   SelectValue,
 } from 'components/Select'
 import Router from 'next/router'
+import { GoogleLogo } from '@phosphor-icons/react'
+import { signIn, useSession } from 'next-auth/react'
 
 interface RegisterClientFormData {
   username: string
   email: string
   password: string
+  confirm_password: string
   cargo: Offices
 }
 
-const RegisterClientFormDataSchema = z.object({
-  username: z.string({
-    required_error: 'Campo obrigatório',
-  }),
-  /* date: z.date({
-    required_error: 'Campo obrigatório',
-  }), */
-  /*  cpf: z
-    .string({
+const RegisterClientFormDataSchema = z
+  .object({
+    username: z.string({
       required_error: 'Campo obrigatório',
-    })
-    .regex(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, 'cpf inválido'), */
-  /*   phone: z.string({
-    required_error: 'Campo obrigatório',
-  }), */
-  password: z
-    .string()
-    .min(6, 'A senha precisa ter no mínimo 6 caracteres ou números'),
-  email: z.string().email('Email inválido, digite um email válido!'),
-  cargo: z.enum([Offices.student, Offices.manager, Offices.employee], {
-    invalid_type_error: 'Selecione um perfil!',
-    required_error: 'Selecione um perfil!',
-  }),
-})
+    }),
+    password: z
+      .string()
+      .min(6, 'A senha precisa ter no mínimo 6 caracteres ou números'),
+    confirm_password: z
+      .string()
+      .min(6, 'A senha precisa ter no mínimo 6 caracteres ou números'),
+    email: z.string().email('Email inválido, digite um email válido!'),
+    cargo: z.enum([Offices.student, Offices.manager, Offices.employee], {
+      invalid_type_error: 'Selecione um perfil!',
+      required_error: 'Selecione um perfil!',
+    }),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: 'Senhas não são semelhantes',
+    path: ['confirm_password'],
+  })
 
 export function FormRegister() {
   const {
@@ -56,6 +56,12 @@ export function FormRegister() {
   } = useForm<RegisterClientFormData>({
     resolver: zodResolver(RegisterClientFormDataSchema),
   })
+
+  async function handleRegisterGoogleProvider() {
+    await signIn('google', {
+      callbackUrl: '/register-provider',
+    })
+  }
 
   async function handleSubmitRegisterClient(data: RegisterClientFormData) {
     const { email, cargo, password, username } = data
@@ -130,6 +136,15 @@ export function FormRegister() {
         </Input.Root>
 
         <Input.Root
+          placeholder="repita sua senha"
+          {...register('confirm_password')}
+          type="password"
+          error={!!errors.confirm_password?.message}
+        >
+          <Input.Error message={errors.confirm_password?.message} />
+        </Input.Root>
+
+        <Input.Root
           placeholder="jonhdoe@gmail.com"
           {...register('email')}
           error={!!errors.email?.message}
@@ -156,6 +171,17 @@ export function FormRegister() {
             )
           }}
         />
+
+        <button
+          className="bg-red-500 p-3 rounded-lg flex items-center justify-center gap-2 mb-6 animate-visible hover:brightness-95 transition-all"
+          type="button"
+          onClick={handleRegisterGoogleProvider}
+        >
+          <GoogleLogo size={25} weight="bold" className="text-primary-white" />
+          <span className="font-bold text-base text-primary-white">
+            Cadastrar com google
+          </span>
+        </button>
 
         {isSubmitting ? (
           <Button.Loading />

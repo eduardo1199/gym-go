@@ -172,17 +172,6 @@ export function FormRegister() {
           }}
         />
 
-        <button
-          className="bg-red-500 p-3 rounded-lg flex items-center justify-center gap-2 mb-6 animate-visible hover:brightness-95 transition-all"
-          type="button"
-          onClick={handleRegisterGoogleProvider}
-        >
-          <GoogleLogo size={25} weight="bold" className="text-primary-white" />
-          <span className="font-bold text-base text-primary-white">
-            Cadastrar com google
-          </span>
-        </button>
-
         {isSubmitting ? (
           <Button.Loading />
         ) : (

@@ -19,7 +19,7 @@ export function DialogConfirm() {
   }
 
   function handleNavigateToMap() {
-    Router.push('/map')
+    Router.push('/dashboard')
     setOpenDialog(false)
   }
 

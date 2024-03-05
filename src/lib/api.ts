@@ -1,5 +1,6 @@
 import axios from 'axios'
+import { env } from 'env'
 
 export const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/',
+  baseURL: env.API_DATABASE_URL,
 })

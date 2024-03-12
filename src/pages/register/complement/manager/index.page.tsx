@@ -1,6 +1,6 @@
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
-import { Button } from 'components/Button'
-import { Input } from 'components/Input'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 import { env } from 'env'
 import { useEffect, useMemo, useState } from 'react'
 

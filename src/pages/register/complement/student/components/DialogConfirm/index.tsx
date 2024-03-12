@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from 'components/AlertDialog'
+} from '@/components/AlertDialog'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
 

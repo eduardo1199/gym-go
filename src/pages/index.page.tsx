@@ -1,7 +1,7 @@
-import { Header } from 'components/Header'
+import { Header } from '@/components/Header'
 import Image from 'next/image'
 import * as Accordion from '@radix-ui/react-accordion'
-import { NavigateLink } from 'components/NavigateLink'
+import { NavigateLink } from '@/components/NavigateLink'
 
 export default function Home() {
   return (

@@ -1,4 +1,9 @@
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { PermissionsEnum } from 'auth/permission'
+import { api } from 'lib/api'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth].api'
 import { useEffect, useMemo, useState } from 'react'
 
 export default function Map() {
@@ -54,3 +59,52 @@ export default function Map() {
     </div>
   )
 }
+
+/* export const getServerSideProps = (async (context) => {
+  // get session
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  // verify session exists in cookies
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+      props: {
+        gyms: [],
+      },
+    }
+  }
+
+  // TODO: Permission on page server side
+  const permissionsUserSession = session.user.role
+
+  const hasPermissionFromPage = [
+    PermissionsEnum.ADMIN,
+    PermissionsEnum.STUDENT,
+  ].includes(permissionsUserSession)
+
+  // TODO: Implement page denied
+  if (!hasPermissionFromPage) {
+    return {
+      redirect: {
+        statusCode: 403,
+        destination: '/denied',
+        permanent: false,
+      },
+    }
+  }
+
+  // TODO: fetch gyms response server side
+  const gymsResponse = await api.get('/gyms')
+
+  // TODO: gyms array response
+  const gyms: [] = gymsResponse.data
+
+  return {
+    props: {
+      gyms,
+    },
+  }
+}) satisfies GetServerSideProps<{ gyms: [] }> */

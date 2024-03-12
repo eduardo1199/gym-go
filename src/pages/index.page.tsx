@@ -1,7 +1,7 @@
-import { Header } from 'components/Header'
+import { Header } from '@/components/Header'
 import Image from 'next/image'
 import * as Accordion from '@radix-ui/react-accordion'
-import { NavigateLink } from 'components/NavigateLink'
+import { NavigateLink } from '@/components/NavigateLink'
 
 export default function Home() {
   return (
@@ -144,3 +144,20 @@ export default function Home() {
     </div>
   )
 }
+
+/* export const getServerSideProps = (async (context) => {
+  // get session
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  // verify session exists in cookies
+  if (session) {
+    // TODO: verify profile session and redirect to correct url page
+
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    }
+  }
+}) satisfies GetServerSideProps */

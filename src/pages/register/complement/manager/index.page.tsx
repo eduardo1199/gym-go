@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { env } from 'env'
@@ -8,7 +8,13 @@ export default function ComplementRegisterManager() {
   const [longitude, setLongitude] = useState<number>()
   const [latitude, setLatitude] = useState<number>()
 
+  const [markerLatLng, setMarkerLatLng] = useState<google.maps.LatLng>()
+
   const libraries = useMemo(() => ['places'], [])
+
+  function handleMarkerInMap(event: google.maps.MapMouseEvent) {
+    setMarkerLatLng(event.latLng)
+  }
 
   const mapCenter = useMemo(
     () => ({ lat: latitude, lng: longitude }),
@@ -41,8 +47,6 @@ export default function ComplementRegisterManager() {
   if (!isLoaded) {
     return <p>Loading</p>
   }
-
-  console.log(isLoaded)
 
   return (
     <div className="w-full h-screen bg-primary-blue">
@@ -93,7 +97,10 @@ export default function ComplementRegisterManager() {
             mapTypeId={'roadmap'}
             mapContainerStyle={{ width: '100%', height: '100%' }}
             onLoad={() => console.log('Map Component Loaded...')}
-          />
+            onClick={handleMarkerInMap}
+          >
+            {markerLatLng && <Marker position={markerLatLng} />}
+          </GoogleMap>
         </div>
       </div>
     </div>

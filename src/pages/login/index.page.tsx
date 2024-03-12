@@ -5,6 +5,9 @@ import { Input } from '@/components/Input'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth].api'
 
 const LoginSchema = z.object({
   email: z.string().email('Email inválido, digite um email válido!'),
@@ -96,3 +99,20 @@ export default function Login() {
     </div>
   )
 }
+
+/* export const getServerSideProps = (async (context) => {
+  // get session
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  // verify session exists in cookies
+  if (session) {
+    // TODO: verify profile session and redirect to correct url page
+
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    }
+  }
+}) satisfies GetServerSideProps */

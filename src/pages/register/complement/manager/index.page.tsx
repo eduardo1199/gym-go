@@ -99,3 +99,20 @@ export default function ComplementRegisterManager() {
     </div>
   )
 }
+
+/* export const getServerSideProps = (async (context) => {
+  // get session
+  const session = await getServerSession(context.req, context.res, authOptions)
+
+  // verify session exists in cookies
+  if (session) {
+    // TODO: verify profile session and redirect to correct url page
+
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    }
+  }
+}) satisfies GetServerSideProps */

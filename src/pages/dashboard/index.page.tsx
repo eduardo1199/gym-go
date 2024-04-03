@@ -1,3 +1,4 @@
+import { SideBar } from '@/components/SideBar'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import { PermissionsEnum } from 'auth/permission'
 import { api } from 'lib/api'
@@ -47,15 +48,19 @@ export default function Map() {
   console.log(isLoaded)
 
   return (
-    <div className="w-full h-screen bg-primary-blue">
-      <GoogleMap
-        options={mapOptions}
-        zoom={14}
-        center={mapCenter}
-        mapTypeId={'roadmap'}
-        mapContainerStyle={{ width: '100%', height: '100%' }}
-        onLoad={() => console.log('Map Component Loaded...')}
-      />
+    <div className="w-full h-screen flex relative">
+      <SideBar />
+
+      <div className="w-full h-screen">
+        <GoogleMap
+          options={mapOptions}
+          zoom={14}
+          center={mapCenter}
+          mapTypeId={'roadmap'}
+          mapContainerStyle={{ width: '100%', height: '100%' }}
+          onLoad={() => console.log('Map Component Loaded...')}
+        />
+      </div>
     </div>
   )
 }

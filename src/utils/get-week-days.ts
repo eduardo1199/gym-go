@@ -9,7 +9,7 @@ export function getWeekDays() {
 
   const daysOfWeek = getDaysFromWeek.map((day) => {
     return {
-      day,
+      day: day.getDay(),
       label: format(day, 'EEEE', {
         locale: ptBR,
       }),

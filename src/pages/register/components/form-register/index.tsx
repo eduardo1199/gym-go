@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/Select'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 
 interface RegisterClientFormData {
@@ -54,7 +54,12 @@ export function FormRegister() {
     handleSubmit,
   } = useForm<RegisterClientFormData>({
     resolver: zodResolver(RegisterClientFormDataSchema),
+    defaultValues: {
+      cargo: Offices.student,
+    },
   })
+
+  const { push } = useRouter()
 
   async function handleRegisterGoogleProvider() {
     await signIn('google', {
@@ -84,21 +89,21 @@ export function FormRegister() {
       console.log(response.data)
 
       if (cargo === Offices.student) {
-        Router.push('/register/complement/student')
+        push('/register/complement/student')
       }
 
       if (cargo === Offices.manager) {
-        Router.push('/register/complement/manager')
+        push('/register/complement/manager')
       }
     } catch (error) {
       console.error(error)
 
       if (cargo === Offices.student) {
-        Router.push('/register/complement/student')
+        push('/register/complement/student')
       }
 
       if (cargo === Offices.manager) {
-        Router.push('/register/complement/manager')
+        push('/register/complement/manager')
       }
     }
   }
@@ -118,7 +123,7 @@ export function FormRegister() {
         onSubmit={handleSubmit(handleSubmitRegisterClient)}
       >
         <Input.Root
-          placeholder="Nome"
+          placeholder="digite seu nome"
           {...register('username')}
           error={!!errors.username?.message}
         >
@@ -135,7 +140,7 @@ export function FormRegister() {
         </Input.Root>
 
         <Input.Root
-          placeholder="repita sua senha"
+          placeholder="confirme sua senha"
           {...register('confirm_password')}
           type="password"
           error={!!errors.confirm_password?.message}
@@ -144,7 +149,7 @@ export function FormRegister() {
         </Input.Root>
 
         <Input.Root
-          placeholder="jonhdoe@gmail.com"
+          placeholder="digite seu email"
           {...register('email')}
           error={!!errors.email?.message}
         >
@@ -158,7 +163,10 @@ export function FormRegister() {
             return (
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger error={!!errors.cargo?.message}>
-                  <SelectValue placeholder="Selecione seu perfil" />
+                  <SelectValue
+                    placeholder="Selecione seu perfil"
+                    data-testid="cargo-value"
+                  />
                 </SelectTrigger>
                 <Input.Error message={errors.cargo?.message} />
                 <SelectContent>

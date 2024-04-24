@@ -3,17 +3,11 @@ import { Input } from '@/components/Input'
 import { TimeField } from '@mui/x-date-pickers'
 
 import * as Accordion from '@radix-ui/react-accordion'
-import {
-  Controller,
-  useFieldArray,
-  useFormContext,
-  useWatch,
-} from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { getWeekDays } from 'utils/get-week-days'
 import { z } from 'zod'
 import { TextFieldStyled } from '../text-field-styled'
 import dayjs, { Dayjs } from 'dayjs'
-import { amountTotalMinutes } from 'utils/amount-total-minutes'
 
 const complementRegisterManagerGymSchema = z.object({
   latitude: z.number(),

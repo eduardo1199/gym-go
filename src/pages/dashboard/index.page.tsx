@@ -1,11 +1,7 @@
 import { SideBar } from '@/components/SideBar'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
-import { PermissionsEnum } from 'auth/permission'
-import { api } from 'lib/api'
 import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 import { authOptions } from 'pages/api/auth/[...nextauth].api'
-import { useEffect, useMemo, useState } from 'react'
 import { DashboardMap } from './components/dashboard-map'
 import dayjs from 'dayjs'
 

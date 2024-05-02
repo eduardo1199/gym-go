@@ -30,6 +30,8 @@ export function MapRegister() {
     const latitude = lat()
     const longitude = lng()
 
+    console.log(latitude, longitude)
+
     setValue('latitude', latitude)
     setValue('longitude', longitude)
   }

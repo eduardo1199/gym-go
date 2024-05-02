@@ -1,5 +1,4 @@
 import { NavigateLink } from '@/components/NavigateLink'
-import Link from 'next/link'
 
 export function Header() {
   return (

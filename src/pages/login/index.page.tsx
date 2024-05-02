@@ -5,9 +5,7 @@ import { Input } from '@/components/Input'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { GetServerSideProps } from 'next'
-import { getServerSession } from 'next-auth'
-import { authOptions } from 'pages/api/auth/[...nextauth].api'
+import { useRouter } from 'next/router'
 
 const LoginSchema = z.object({
   email: z.string().email('Email inválido, digite um email válido!'),
@@ -22,13 +20,12 @@ export default function Login() {
   const {
     register,
     formState: { isSubmitting, errors },
-    control,
-    setError,
-    watch,
     handleSubmit,
   } = useForm<LoginDataSchema>({
     resolver: zodResolver(LoginSchema),
   })
+
+  const { push } = useRouter()
 
   async function handleRegisterGoogleProvider() {
     await signIn('google')
@@ -38,6 +35,10 @@ export default function Login() {
     // TODO: execute login
 
     console.log(data)
+
+    const redirectUrl = '/dashboard'
+
+    push(redirectUrl)
   }
 
   return (
@@ -54,7 +55,7 @@ export default function Login() {
           >
             <Input.Root
               {...register('email')}
-              placeholder="Email"
+              placeholder="digite seu email"
               className="bg-transparent text-white"
               type="email"
               error={!!errors.email?.message}
@@ -63,7 +64,7 @@ export default function Login() {
             </Input.Root>
             <Input.Root
               {...register('password')}
-              placeholder="Senha"
+              placeholder="digite sua senha"
               className="bg-transparent text-white"
               type="password"
               error={!!errors.password?.message}

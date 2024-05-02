@@ -1,9 +1,4 @@
-import {
-  OutlinedInputProps,
-  TextField,
-  TextFieldProps,
-  styled,
-} from '@mui/material'
+import { TextField, styled } from '@mui/material'
 
 import colors from 'tailwindcss/colors'
 

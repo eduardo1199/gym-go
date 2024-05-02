@@ -1,22 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
-import { fireEvent, getAllByText, render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { FormRegister } from './index'
-import * as Router from 'next/router'
+import mockRouter from 'next-router-mock'
 
-const mockPush = vi.fn()
-
-vi.spyOn(Router, 'useRouter')
-vi.mock('next/router', async (importOriginal) => {
-  return {
-    ...(await importOriginal<typeof import('next/router')>()),
-    useRouter: () => {
-      return {
-        push: mockPush,
-      }
-    },
-  }
-})
+vi.mock('next/router', () => require('next-router-mock'))
 
 describe('testing component form register', () => {
   it('should render basic inputs and button submit', async () => {
@@ -33,6 +21,7 @@ describe('testing component form register', () => {
   })
 
   it('should be submit form when written input and submitting', async () => {
+    mockRouter.push('/dashboard')
     const { getByPlaceholderText, getByText, getByTestId } = render(
       <FormRegister />,
     )
@@ -54,7 +43,8 @@ describe('testing component form register', () => {
 
     await user.click(getByText('Cadastrar'))
 
-    expect(mockPush).toBeCalled()
+    expect('Cadastro relizado com sucesso!').toBeInTheDocument()
+    expect(mockRouter.asPath).toEqual('/dashboard')
   })
 
   it('should be not submit form when no have value name', async () => {
@@ -77,9 +67,12 @@ describe('testing component form register', () => {
     await user.click(getByText('Cadastrar'))
 
     expect(getByText('Campo obrigatório')).toBeInTheDocument()
+    expect(mockRouter.asPath).toEqual('/dashboard')
   })
 
   it('should be not submit form when that passwords not match', async () => {
+    mockRouter.push('/dashboard')
+
     const { getByPlaceholderText, getByText, getByTestId } = render(
       <FormRegister />,
     )
@@ -99,9 +92,12 @@ describe('testing component form register', () => {
     await user.click(getByText('Cadastrar'))
 
     expect(getByText('Senhas não são semelhantes')).toBeInTheDocument()
+    expect(mockRouter.asPath).toEqual('/dashboard')
   })
 
   it('should be not submit form when that password is not valid length', async () => {
+    mockRouter.push('/dashboard')
+
     const { getByPlaceholderText, getByText, getByTestId, getAllByText } =
       render(<FormRegister />)
 
@@ -122,5 +118,6 @@ describe('testing component form register', () => {
     expect(
       getAllByText('A senha precisa ter no mínimo 6 caracteres ou números'),
     ).toHaveLength(2)
+    expect(mockRouter.asPath).toEqual('/dashboard')
   })
 })

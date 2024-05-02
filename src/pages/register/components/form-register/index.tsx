@@ -74,38 +74,13 @@ export function FormRegister() {
       setError('username', {
         message: 'Campo obrigatório',
       })
-
-      return
     }
 
-    try {
-      const response = await baseApi.post('/register', {
-        username,
-        email,
-        cargo,
-        password,
-      })
+    const redirectUrl = '/dashboard'
 
-      console.log(response.data)
+    push(redirectUrl)
 
-      if (cargo === Offices.student) {
-        push('/register/complement/student')
-      }
-
-      if (cargo === Offices.manager) {
-        push('/register/complement/manager')
-      }
-    } catch (error) {
-      console.error(error)
-
-      if (cargo === Offices.student) {
-        push('/register/complement/student')
-      }
-
-      if (cargo === Offices.manager) {
-        push('/register/complement/manager')
-      }
-    }
+    // TODO: register client manager
   }
 
   return (

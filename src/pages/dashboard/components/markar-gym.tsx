@@ -16,11 +16,16 @@ interface MarkerGymProps extends MarkerProps {
 }
 
 export function MarkerGym({ gym, ...props }: MarkerGymProps) {
+  function handleOpenDialogDetailsGym() {
+    console.log('click gym')
+  }
+
   return (
     <div>
       <MarkerF
         key={gym.id}
         icon="https://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png"
+        onClick={handleOpenDialogDetailsGym}
         {...props}
       />
     </div>

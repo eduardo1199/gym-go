@@ -63,8 +63,6 @@ export function DashboardMap({ gyms }: DashboardMapProps) {
 
     const latitude = lat()
     const longitude = lng()
-
-    console.log(latitude, longitude)
   }
 
   return (

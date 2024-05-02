@@ -50,7 +50,7 @@ export function DashboardMap({ gyms }: DashboardMapProps) {
   }, [])
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_KEY,
     libraries: libraries as any,
   })
 

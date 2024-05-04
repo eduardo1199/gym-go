@@ -1,8 +1,7 @@
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api'
 import { useEffect, useMemo, useState } from 'react'
 
-import { Person } from '@phosphor-icons/react'
-import { MarkerGym } from './markar-gym'
+import { MarkerGym } from '../marker-gym'
 
 type Gym = {
   id: number

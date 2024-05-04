@@ -1,8 +1,7 @@
 import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api'
 import { useEffect, useMemo, useState } from 'react'
 
-import { Person } from '@phosphor-icons/react'
-import { MarkerGym } from './markar-gym'
+import { MarkerGym } from '../marker-gym'
 
 type Gym = {
   id: number
@@ -23,8 +22,6 @@ export function DashboardMap({ gyms }: DashboardMapProps) {
   const [latitude, setLatitude] = useState<number>()
 
   const libraries = useMemo(() => ['places'], [])
-
-  console.log(gyms)
 
   const mapOptions = useMemo(
     () => ({
@@ -50,7 +47,7 @@ export function DashboardMap({ gyms }: DashboardMapProps) {
   }, [])
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_MAPS_KEY,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
     libraries: libraries as any,
   })
 
